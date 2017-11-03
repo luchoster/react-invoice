@@ -1,10 +1,18 @@
-import React from 'react'
+import * as R     from 'ramda'
+import React      from 'react'
 import ReactTable from 'react-table'
+import { Button } from 'material-ui'
 
 class ItemsRows extends React.Component {
   state = {
-    pageSize: 2,
-    data: [{}]
+    data: [{
+      item:"",
+      description:"",
+      rate: "",
+      qty: "",
+      price: ""
+    }],
+    minRows: 1
   }
 
   renderEditable = (cellInfo) =>
@@ -22,13 +30,25 @@ class ItemsRows extends React.Component {
       }}
     />
 
+  addRow = () =>
+    this.setState({
+      data: R.insert(R.last, {
+          item:"",
+          description:"",
+          rate: "",
+          qty: "",
+          price: ""
+      })(this.state.data)
+    })
+
   render() {
     return(
       <div className="col">
         <ReactTable
           data={this.state.data}
+          minRows={this.state.minRows}
           noDataText="Oh Noes!"
-          pageSize={this.state.pageSize}
+          showPagination={false}
           columns={[
             {
               Header: "Item",
@@ -66,6 +86,7 @@ class ItemsRows extends React.Component {
             }
           ]}
         />
+        <Button onTouchTap={() => this.addRow() }>+</Button>
       </div>
     )
   }

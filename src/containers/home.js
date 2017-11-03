@@ -31,12 +31,12 @@ class Home extends React.Component {
           </div>
           <div className="col-sm-3">
             <div className="invoice row">
-              <p className="col">Invoice #: </p>
-              <p className="col text-right" contentEditable suppressContentEditableWarning>00</p>
+              <p className="col text-right">Invoice #: </p>
+              <p className="col text-left" contentEditable suppressContentEditableWarning>00</p>
             </div>
             <div className="date row">
-              <p className="col">Date: </p>
-              <p className="col text-right">{moment().format("MM-DD-YYYY")}</p>
+              <p className="col text-right">Date: </p>
+              <p className="col text-left">{moment().format("MM-DD-YYYY")}</p>
             </div>
           </div>
         </header>
