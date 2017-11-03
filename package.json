@@ -6,6 +6,7 @@
     "react-scripts": "1.0.14"
   },
   "dependencies": {
+    "add": "^2.0.6",
     "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "bootstrap": "4.0.0-beta.2",
@@ -22,9 +23,11 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "react-table": "^6.7.4",
     "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "yarn": "^1.2.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

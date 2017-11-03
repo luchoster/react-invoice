@@ -1,22 +1,41 @@
 html {
   font: 16px;
-  font-family: 'Handlee',cursive;
   padding: .5in;
   padding-top: 1in;
   & body {
     background: #999;
+    p {
+      font-family: 'Handlee',cursive;
+    }
   }
   .container {
     background: #fff;
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Handlee' !important;
+}
+
 .header-title {
   font-family: 'Handlee';
   font-weight: bold;
   letter-spacing: -0.5px;
+  padding-bottom: 1em;
   text-align: center;
   text-transform: uppercase;
+}
+
+address {
+  padding-top: 20px;
+  h2 {
+    font: bold 100% 'Handlee'
+  }
 }
 
 .app {
@@ -42,7 +61,16 @@ html {
   }
 }
 
+.client-info {
+  padding-top: 20px;
+}
+
 .user-logo {
+  max-height: 200px;
+  position: relative;
+  img {
+    max-height: 200px;
+  }
   input {
     cursor: pointer;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";

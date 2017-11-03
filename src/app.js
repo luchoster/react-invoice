@@ -30,6 +30,7 @@ class Invoice extends Component {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line
     firebaseApp
   }
 
