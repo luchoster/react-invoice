@@ -2,44 +2,50 @@ import * as R     from 'ramda'
 import React      from 'react'
 import ReactTable from 'react-table'
 import { Button } from 'material-ui'
+import AddIcon    from 'material-ui-icons/Add'
 
 class ItemsRows extends React.Component {
   state = {
     data: [{
-      item:"",
-      description:"",
-      rate: "",
-      qty: "",
-      price: ""
+      item        : "",
+      description : "",
+      rate        : 0,
+      qty         : 0,
+      price       : 0
     }],
     minRows: 1
   }
 
-  renderEditable = (cellInfo) =>
-    <div
-      style={{ backgroundColor: "#fafafa" }}
-      contentEditable
-      suppressContentEditableWarning
-      onBlur={e => {
-        const data = [...this.state.data];
-        data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
-        this.setState({ data });
-      }}
-      dangerouslySetInnerHTML={{
-        __html: this.state.data[cellInfo.index][cellInfo.column.id]
-      }}
-    />
+  renderEditable = (cellInfo) => {
+    return(
+      <div
+        style={{ backgroundColor: "#fafafa" }}
+        contentEditable
+        className="text-center"
+        suppressContentEditableWarning
+        onBlur={ e => {
+          const data = [...this.state.data];
+          data[cellInfo.index][cellInfo.column.id] = e.target.innerHTML;
+          this.setState({ data });
+        }}
+        dangerouslySetInnerHTML={{
+          __html: this.state.data[cellInfo.index][cellInfo.column.id]
+        }}
+      />
+    )
+  }
 
-  addRow = () =>
+  addRow = () => {
     this.setState({
       data: R.insert(R.last, {
-          item:"",
-          description:"",
-          rate: "",
-          qty: "",
-          price: ""
+        item        : "",
+        description : "",
+        rate        : 0,
+        qty         : 0,
+        price       : 0
       })(this.state.data)
     })
+  }
 
   render() {
     return(
@@ -62,6 +68,9 @@ class ItemsRows extends React.Component {
               accessor: "description",
               className: "col",
               Cell: this.renderEditable,
+              style:{
+                'white-space':'initial'
+              }
             },
             {
               Header: "Rate",
@@ -86,7 +95,9 @@ class ItemsRows extends React.Component {
             }
           ]}
         />
-        <Button onTouchTap={() => this.addRow() }>+</Button>
+        <Button className="add-btn" dense color="primary" fab aria-label="add" onTouchTap={() => this.addRow() }>
+          <AddIcon />
+        </Button>
       </div>
     )
   }

@@ -40,16 +40,16 @@ class Home extends React.Component {
             </div>
           </div>
         </header>
-        <article className="row">
-          <div className="left-block invoice-no col">
+        <section className="row">
+          <section className="left-block invoice-no col">
             <address contentEditable suppressContentEditableWarning>
               <h2>CompuExpress US, LLC.</h2>
               <p>7655 Lone Shepherd Dr.<br />Las Vegas, NV 89166</p>
               <p>(702) 514-0607</p>
               <p>http://compuexpress.us</p>
             </address>
-          </div>
-          <div className="col right-block text-right">
+          </section>
+          <section className="col right-block text-right">
             <div className="client-info">
               <address contentEditable suppressContentEditableWarning>
                 <h2>Company Name <br />c/o Contact Name</h2>
@@ -57,11 +57,44 @@ class Home extends React.Component {
                 <p>(area) phone-number</p>
               </address>
             </div>
-          </div>
-        </article>
-        <article className="row">
+          </section>
+        </section>
+        <section className="row">
          <ItemsRows />
-        </article>
+        </section>
+        <section className="row">
+          <section className="col">
+            <div contentEditable suppressContentEditableWarning className="text-center">
+              <p>Make all checks payable to </p>
+              <h2><em>CompuExpress US</em></h2>
+              <p />
+              <h2>Thank you for your business!</h2>
+            </div>
+          </section>
+          <section className="col">
+            <div className="row">
+              <div className="col text-right">
+                <p>Sub Total: </p>
+              </div>
+              <div className="col">
+              </div>
+            </div>
+            <div className="row">
+              <div className="col text-right">
+                <p>Tax: </p>
+              </div>
+              <div className="col">
+              </div>
+            </div>
+            <div className="row">
+              <div className="col text-right">
+                <p>Total: </p>
+              </div>
+              <div className="col">
+              </div>
+            </div>
+          </section>
+        </section>
       </div>
     )
   }

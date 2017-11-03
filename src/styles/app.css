@@ -65,6 +65,11 @@ address {
     top: 0;
     width: 100%; }
 
+.add-btn {
+  margin: 10px; }
+  .add-btn:focus {
+    outline: none; }
+
 *[contenteditable]:hover, *[contenteditable]:focus, td:hover *[contenteditable], td:focus *[contenteditable], img.hover {
   background: #def;
   -webkit-box-shadow: 0 0 1em 0.5em #def;
