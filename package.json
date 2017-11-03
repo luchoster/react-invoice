@@ -1,0 +1,38 @@
+{
+  "name": "invoice-react",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.14"
+  },
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "axios": "^0.16.2",
+    "bootstrap": "4.0.0-beta.2",
+    "firebase": "^4.5.1",
+    "font-awesome": "^4.7.0",
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "moment": "^2.19.1",
+    "node-sass-chokidar": "^0.0.3",
+    "npm-run-all": "^4.1.1",
+    "ramda": "^0.25.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-tap-event-plugin": "^3.0.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

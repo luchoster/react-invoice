@@ -1,0 +1,48 @@
+html {
+  font: 16px;
+  font-family: 'Handlee',cursive;
+  padding: .5in;
+  padding-top: 1in; }
+  html body {
+    background: #999; }
+  html .container {
+    background: #fff; }
+
+.header-title {
+  font-family: 'Handlee';
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  text-align: center;
+  text-transform: uppercase; }
+
+.app {
+  padding: .5in; }
+
+.flex {
+  flex: 1; }
+
+.right-block {
+  float: right; }
+
+.left-block {
+  float: left; }
+
+.center-block {
+  margin: 0 auto; }
+
+.user-logo input {
+  cursor: pointer;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  position: absolute;
+  top: 0;
+  width: 100%; }
+
+*[contenteditable]:hover, *[contenteditable]:focus, td:hover *[contenteditable], td:focus *[contenteditable], img.hover {
+  background: #def;
+  -webkit-box-shadow: 0 0 1em 0.5em #def;
+  box-shadow: 0 0 1em 0.5em #def; }
