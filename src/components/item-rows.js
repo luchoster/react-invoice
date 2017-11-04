@@ -69,7 +69,7 @@ class ItemsRows extends React.Component {
               className: "col",
               Cell: this.renderEditable,
               style:{
-                'white-space':'initial'
+                whiteSpace:'initial'
               }
             },
             {

@@ -3,8 +3,12 @@ import React, { Component }         from 'react';
 import { BrowserRouter, Switch }    from 'react-router-dom'
 import { connect }                  from 'react-redux'
 import { RouteActor, RouteFunctor } from './routes'
-import { firebaseApp }              from './lib/auth'
+import { firebaseApp, users }       from './lib/auth'
+import { notNilOrEmpty }            from './lib/helpers'
 import MenuIcon                     from 'material-ui-icons/Menu'
+import IconButton                   from 'material-ui/IconButton'
+import CloseIcon                    from 'material-ui-icons/Close'
+import { Fb, User }                 from './actions'
 import {
   AppBar,
   Button,
@@ -12,26 +16,45 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
+  Snackbar,
   TextField,
   Typography,
   Toolbar,
   withStyles
 }               from 'material-ui'
-import { User } from './actions'
+
 
 class Invoice extends Component {
   state = {
     open: false,
+    snackbar: false,
+    save_response: "",
     form: {
       email: '',
       password: ''
-    }
+    },
+    invoice: {
+      id: Math.random(),
+      number: 179,
+      total: 85
+    },
+    userInvoices:[]
   }
 
   componentDidMount() {
     // eslint-disable-next-line
     firebaseApp
+
+    users.once('value')
+      .then( snap => {
+        let snapshotArray = []
+        const childKey = snap.child(`invoices/${this.props.user.uid}`)
+        R.forEach( item => {
+          let itemVal = item.val()
+          snapshotArray.push(itemVal);
+          this.setState({userInvoices: snapshotArray})
+        })(childKey)
+      })
   }
 
   handleOpen = () => {
@@ -40,6 +63,14 @@ class Invoice extends Component {
 
   handleRequestClose = () => {
     this.setState({ open: false })
+  }
+
+  openSnackbar = () => {
+    this.setState({ snackbarn: true })
+  }
+
+  closeSnackbar = () => {
+    this.setState({ snackbar: false })
   }
 
   updateForm = e => {
@@ -53,6 +84,14 @@ class Invoice extends Component {
       e.preventDefault()
       provider()
     }
+  }
+
+  saveInvoice = () => {
+    this.props.addInvoice(this.state.invoice)
+    this.setState({
+      snackbar: true,
+      save_response: notNilOrEmpty(this.props.save_response) && this.props.save_response
+    })
   }
 
   submit = e => {
@@ -77,13 +116,52 @@ class Invoice extends Component {
                 </Typography>
                 {
                   R.isEmpty(this.props.user) ?
-                    <Button color="contrast" onTouchTap={this.handleOpen}>Login</Button>
+                    <Button color="contrast" onTouchTap={this.handleOpen}>
+                        <i className="fa fa-sign-in fa-2x" />
+                    </Button>
                   :
-                    <Button color="contrast" onTouchTap={this.handleOpen}>Logout</Button>
+                    <div>
+                      <Button color="contrast" onTouchTap={this.saveInvoice}>
+                      <i className="fa fa-floppy-o fa-2x" />
+                      </Button>
+                      <Button color="contrast" onTouchTap={this.props.logout}>
+                        <i className="fa fa-sign-out fa-2x" />
+                      </Button>
+                  </div>
                 }
               </Toolbar>
             </AppBar>
           </div>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            open={this.state.snackbar}
+            autoHideDuration={6000}
+            onRequestClose={this.closeSnackbar}
+            SnackbarContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={
+              <span id="message-id">
+                Saved Successfully
+              </span>
+            }
+            action={[
+              <Button key="undo" color="accent" dense onClick={this.closeSnackbar}>
+                OK
+              </Button>,
+              <IconButton
+                key="close"
+                aria-label="Close"
+                color="inherit"
+                onTouchTap={this.closeSnackbar}
+              >
+                <CloseIcon />
+              </IconButton>,
+            ]}
+          />
           <Dialog open={R.isEmpty(this.props.user) ? this.state.open : false} onRequestClose={this.handleRequestClose}>
             <DialogTitle>Login</DialogTitle>
             <DialogContent>
@@ -132,7 +210,7 @@ class Invoice extends Component {
           </Switch>
         </div>
       </BrowserRouter>
-    );
+    )
   }
 }
 
@@ -151,11 +229,14 @@ const styles = theme => ({
 })
 
 const mapStateToProps = state => ({
-  user: state.User
+  user: state.User,
+  save_response: state.fb
 })
 
 const mapDispatchToProps = dispatch => ({
-  emailLogin: request_body => dispatch(User.emailLogin(request_body))
+  addInvoice: (data) => dispatch(Fb.saveInvoice(data)),
+  emailLogin: request_body => dispatch(User.emailLogin(request_body)),
+  logout: () => dispatch(User.logoutUser)
 })
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Invoice))

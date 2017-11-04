@@ -12,12 +12,15 @@ export const firebaseConfig = {
 }
 
 //the root app just in case we need it
-export const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const firebaseApp = firebase.initializeApp(firebaseConfig)
 
-export const db = firebaseApp.database(); //the real-time database
-export const auth = firebaseApp.auth(); //the firebase auth namespace
+export const db = firebaseApp.database() //the real-time database
+export const auth = firebaseApp.auth() //the firebase auth namespace
+export const users = db.ref('users')
 
 export const storageKey = 'KEY_FOR_LOCAL_STORAGE';
+
+export const logout = () => firebase.auth().signOut()
 
 export const isAuthenticated = () => {
   return !!auth.currentUser || !!localStorage.getItem(storageKey);
@@ -41,3 +44,5 @@ export const getCurrentUser = () =>
       profile_image: R.prop('photoURL')
     })
   ))
+
+

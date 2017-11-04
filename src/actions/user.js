@@ -1,10 +1,14 @@
-import firebase from 'firebase'
+import Bluebird   from 'bluebird'
+import firebase   from 'firebase'
+import { logout } from '../lib/auth'
 
 const TYPE = {
-  create_success: 'CREATE_USER_SUCCESS',
-  create_failed: 'CREATE_USER_FAILED',
-  login_success: 'LOGIN_SUCCESS',
-  login_failed: 'LOGIN_FAILED'
+  create_success : 'CREATE_USER_SUCCESS',
+  create_failed  : 'CREATE_USER_FAILED',
+  login_success  : 'LOGIN_SUCCESS',
+  login_failed   : 'LOGIN_FAILED',
+  logout_pending : 'LOGOUT_PENDING',
+  logout_success : 'LOGOUT_SUCCESS',
 }
 
 const createUser = credentials => dispatch => {
@@ -19,11 +23,17 @@ const emailLogin = credentials => dispatch => {
     .catch(err => dispatch({type: TYPE.login_failed, payload: err.message}))
 }
 
-const logout = () => firebase.auth().signOut()
+const logoutStart = () => ({ type: TYPE.logout_pending })
+const logoutSuccessfully = () => ({ type: TYPE.logout_success })
+const logoutUser = (dispatch, getState) =>
+  Bluebird.resolve(dispatch(logoutStart()))
+  .then( () => logout() )
+  .then( () => dispatch(logoutSuccessfully()))
+
 
 export default {
   TYPE,
   createUser,
   emailLogin,
-  logout
+  logoutUser
 }

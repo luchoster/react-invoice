@@ -9,6 +9,8 @@
 
 # production
 /build
+/src/lib/auth.js
+/src/lib/_firebase/
 
 # misc
 .DS_Store
