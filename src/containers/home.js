@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import moment      from 'moment'
 // import { Divider } from 'material-ui'
 import ItemsRows   from '../components/item-rows'
+import {
+  TextField
+} from 'material-ui'
 
 class Home extends React.Component {
   state = {
-    logo: 'http://compuexpress.us/wp-content/uploads/2016/09/logo-v.png'
+    logo: 'http://compuexpress.us/wp-content/uploads/2016/09/logo-v.png',
+    invoice: {
+      invoice_no: 1
+    }
   }
 
   imgUploaded = event => {
@@ -31,30 +37,84 @@ class Home extends React.Component {
           </div>
           <div className="col-sm-3">
             <div className="invoice row">
-              <p className="col text-right">Invoice #: </p>
-              <p className="col text-left" contentEditable suppressContentEditableWarning>00</p>
+              <TextField
+                className="col text-left input-invoice"
+                label="Invoice Number"
+                margin="normal"
+                name="invoice_no"
+                type="number"
+                onChange={ e => console.log(e.target.value) }
+              />
             </div>
             <div className="date row">
-              <p className="col text-right">Date: </p>
-              <p className="col text-left">{moment().format("MM-DD-YYYY")}</p>
+              <TextField
+                className="col text-left input-date"
+                label="Date"
+                margin="normal"
+                name="date"
+                type="date"
+                defaultValue={moment().format("MM-DD-YYYY")}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
             </div>
           </div>
         </header>
         <section className="row">
           <section className="left-block invoice-no col">
-            <address contentEditable suppressContentEditableWarning>
-              <h2>CompuExpress US, LLC.</h2>
-              <p>7655 Lone Shepherd Dr.<br />Las Vegas, NV 89166</p>
-              <p>(702) 514-0607</p>
-              <p>http://compuexpress.us</p>
+            <address>
+              <div className="row">
+                <TextField
+                  className="col-sm-6"
+                  label="Company and/or Name"
+                  name="company_name"
+                />
+              </div>
+              <div className="row">
+                <TextField
+                  className="col-sm-6"
+                  label="Address"
+                  name="user_address"
+                  multiline
+                  rowsMax="2"
+                />
+              </div>
+              <div className="row">
+                <TextField
+                  className="col-sm-6"
+                  label="Phone Number"
+                  name="phone_no"
+                />
+              </div>
             </address>
           </section>
-          <section className="col right-block text-right">
+          <section className="col right-block align-items-end">
             <div className="client-info">
-              <address contentEditable suppressContentEditableWarning>
-                <h2>Company Name <br />c/o Contact Name</h2>
-                <p>Address<br />City State, Zipcode</p>
-                <p>(area) phone-number</p>
+              <address>
+                <div className="row">
+                  <TextField
+                    className="col-sm-6 align-self-end"
+                    label="Company and/or Name"
+                    name="company_name"
+                  />
+                </div>
+                <div className="row">
+                  <TextField
+                    className="col-sm-6"
+                    label="Address"
+                    name="user_address"
+                    multiline
+                    rowsMax="2"
+                  />
+                </div>
+                <div className="row">
+                  <TextField
+                    className="col-sm-6"
+                    label="Phone Number"
+                    name="phone_no"
+                  />
+                </div>
               </address>
             </div>
           </section>

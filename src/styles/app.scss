@@ -56,8 +56,19 @@ address {
   margin: 0 auto;
 }
 
+.full-width { width: 100% }
+
 .invoice-no {
   p {
+  }
+}
+
+address {
+  .input-container {
+    margin-top: 10px !important;
+    .input-with-icon {
+      padding: 5px 0 0
+    }
   }
 }
 

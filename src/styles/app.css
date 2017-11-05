@@ -45,6 +45,14 @@ address {
 .center-block {
   margin: 0 auto; }
 
+.full-width {
+  width: 100%; }
+
+address .input-container {
+  margin-top: 10px !important; }
+  address .input-container .input-with-icon {
+    padding: 5px 0 0; }
+
 .client-info {
   padding-top: 20px; }
 
